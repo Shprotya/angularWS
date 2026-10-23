@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { input } from '@angular/core';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './car-details.scss',
   templateUrl: './car-details.html',
 })
-export class CarDetails {}
+export class CarDetails {
+  readonly id = input.required<string>();
+}
