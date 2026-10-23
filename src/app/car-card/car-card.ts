@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { input } from '@angular/core';
+import { CarModel } from '../features/cars/models/car.model';
 
 @Component({
   imports: [],
@@ -6,4 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './car-card.scss',
   templateUrl: './car-card.html',
 })
-export class CarCard {}
+export class CarCard {
+  car = input.required<CarModel>();
+}

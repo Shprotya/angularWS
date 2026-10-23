@@ -2,11 +2,11 @@
 
 @if (cars$ | async; as cars) {
 
-<ul>
+<div class="grid">
     @for (car of cars; track car._id) {
-    <li>{{ car.make }} {{ car.model }}</li>
+    <app-car-card [car]="car" />
     }
-</ul>
+</div>
 } @else {
 Loading cars...
 
