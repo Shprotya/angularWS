@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 import { CarService } from '../../services/car.service';
 import { CarModel } from '../../models/car.model';
 import { AsyncPipe } from '@angular/common';
+import { CarCard } from '../../../../car-card/car-card';
 
 @Component({
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, CarCard],
   selector: 'app-car-list',
   styleUrl: './car-list.scss',
   templateUrl: './car-list.html',
