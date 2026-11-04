@@ -2,7 +2,7 @@ import { Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { CarModel } from '../models/car.model';
+import { CarModel, CreateCarDto } from '../models/car.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
@@ -20,7 +20,7 @@ export class CarService {
         return this.http.get<CarModel>(`${this.apiUrl}/${id}`);
     }
 
-    addCar(car: CarModel): Observable<CarModel> {
+    addCar(car: CreateCarDto): Observable<CarModel> {
         return this.http.post<CarModel>(this.apiUrl, car)
             .pipe(
                 catchError(this.handleError)
