@@ -1,13 +1,11 @@
 <h2>Car List</h2>
 
-@if (cars$ | async; as cars) {
-
+@if (cars(); as carList) {
 <div class="grid">
-    @for (car of cars; track car._id) {
+    @for (car of carList; track car._id) {
     <app-car-card [car]="car" />
     }
 </div>
 } @else {
-Loading cars...
-
+<p>Loading cars...</p>
 }
