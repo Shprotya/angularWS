@@ -1,5 +1,8 @@
 <div class="car-list-container">
-    <h2>Car Inventory</h2>
+    <div class="header">
+        <h2>Car Inventory</h2>
+        <a routerLink="/cars/new" class="add-button">Add car</a>
+    </div>
 
     @let s = state();
     @if (s.status === 'loading') {
