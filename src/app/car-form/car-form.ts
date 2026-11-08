@@ -4,9 +4,19 @@ import { CarModel, CreateCarDto } from '../features/cars/models/car.model';
 import { CarService } from '../features/cars/services/car.service';
 import { Router, RouterLink } from '@angular/router';
 import { signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, 
+    RouterLink,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule
+],
   selector: 'app-car-form',
   styleUrl: './car-form.scss',
   templateUrl: './car-form.html',
