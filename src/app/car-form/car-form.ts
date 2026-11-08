@@ -10,13 +10,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  imports: [ReactiveFormsModule, 
+  imports: [ReactiveFormsModule,
     RouterLink,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule
-],
+  ],
   selector: 'app-car-form',
   styleUrl: './car-form.scss',
   templateUrl: './car-form.html',
@@ -27,14 +27,15 @@ export class CarForm {
   private router = inject(Router);
   saving = signal(false);
   saveError = signal<string | null>(null);
+  readonly currentYear = new Date().getFullYear();
 
   carForm = this.formBuilder.nonNullable.group({
-    make: ['', Validators.required],
-    model: ['', Validators.required],
-    year: this.formBuilder.control<number | null> (null)
+    make: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
+    model: ['', [Validators.required, Validators.maxLength(30)]],
+    year: this.formBuilder.control<number | null>(null, [Validators.min(1950), Validators.max(this.currentYear + 1),]),
   });
 
-    onSubmit(): void {
+  onSubmit(): void {
     const { make, model, year } = this.carForm.getRawValue();
     const newCar: CreateCarDto = { make, model, year: year ?? undefined };
 
@@ -46,10 +47,10 @@ export class CarForm {
         console.log('Car added successfully:', response);
         this.router.navigate(['/cars']);
       },
-    error: (err: Error) => {
-      this.saveError.set(err.message);
-      this.saving.set(false);
-    },
+      error: (err: Error) => {
+        this.saveError.set(err.message);
+        this.saving.set(false);
+      },
     });
   }
 
