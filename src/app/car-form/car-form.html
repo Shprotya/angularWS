@@ -1,32 +1,54 @@
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="car-form">
     <h2>Car Details Form</h2>
 
+    @if (saving()) {
+    <mat-progress-bar mode="buffer" />
+    }
+
 
     <!-- Make Field -->
-    <div class="form-group">
-        <label for="make">Make:</label>
-        <input id="make" type="text" formControlName="make" placeholder="e.g. Toyota" />
-    </div>
+    <mat-form-field>
+        <mat-label>Make</mat-label>
+        <input matInput formControlName="make" placeholder="e.g. Toyota" />
+        @if (carForm.controls.make.hasError('required')) {
+        <mat-error>Make is required</mat-error>
+        } @else if (carForm.controls.make.hasError('minlength')) {
+        <mat-error>Make must be at least 2 characters</mat-error>
+        } @else if (carForm.controls.make.hasError('maxlength')) {
+        <mat-error>Make must be 30 characters or fewer</mat-error>
+        }
+    </mat-form-field>
+
 
     <!-- Model Field -->
-    <div class="form-group">
-        <label for="model">Model:</label>
-        <input id="model" type="text" formControlName="model" placeholder="e.g. Corolla" />
-
-    </div>
+    <mat-form-field>
+        <mat-label>Model:</mat-label>
+        <input matInput formControlName="model" placeholder="e.g. Corolla" />
+        @if (carForm.controls.model.hasError('required')) {
+        <mat-error>Model is required</mat-error>
+        } @else if (carForm.controls.model.hasError('maxlength')) {
+        <mat-error>Model must be 30 characters or fewer</mat-error>
+        }
+    </mat-form-field>
 
     <!-- Year Field -->
-    <div class="form-group">
-        <label for="year">Year:</label>
-        <input id="year" type="number" formControlName="year" placeholder="e.g. 2022" />
-    </div>
+    <mat-form-field>
+        <mat-label>Year:</mat-label>
+        <mat-hint>Optional</mat-hint>
+        <input matInput type="number" formControlName="year" placeholder="e.g. 2022" />
+        @if (carForm.controls.year.hasError('min')) {
+        <mat-error>Year must be a valid year</mat-error>
+        } @else if (carForm.controls.year.hasError('max')) {
+        <mat-error>Year must be within the valid range</mat-error>
+        }
+    </mat-form-field>
 
     <!-- Action Buttons -->
     @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
     <div class="button-group">
-        <button type="submit" [disabled]="saving()">
+        <button matButton="filled" type="submit" [disabled]="saving()">
             {{ saving() ? 'Saving...' : 'Save car' }}
         </button>
-        <a routerLink="/cars">Cancel</a>
+        <a matButton routerLink="/cars">Cancel</a>
     </div>
 </form>
