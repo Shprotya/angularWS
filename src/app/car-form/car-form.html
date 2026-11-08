@@ -1,6 +1,10 @@
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="car-form">
     <h2>Car Details Form</h2>
 
+    @if (saving()) {
+    <mat-progress-bar mode="buffer" />
+    }
+
 
     <!-- Make Field -->
     <mat-form-field>
@@ -45,6 +49,6 @@
         <button matButton="filled" type="submit" [disabled]="saving()">
             {{ saving() ? 'Saving...' : 'Save car' }}
         </button>
-        <a matButton  routerLink="/cars">Cancel</a>
+        <a matButton routerLink="/cars">Cancel</a>
     </div>
 </form>
