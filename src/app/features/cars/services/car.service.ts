@@ -2,7 +2,7 @@ import { Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { CarModel, CreateCarDto } from '../models/car.model';
+import { CarModel, CreateCarDto, UpdateCarDto } from '../models/car.model';
 import { HttpErrorResponse } from '@angular/common/http';
 import { throwError } from 'rxjs';
 
@@ -28,6 +28,16 @@ export class CarService {
             .pipe(
                 catchError((err) => this.handleError(err))
             )
+    }
+
+    updateCar(id: string, changes: UpdateCarDto): Observable<CarModel> {
+        return this.http.put<CarModel>(`${this.apiUrl}/${id}`, changes)
+            .pipe(catchError((err) => this.handleError(err)));
+    }
+
+    deleteCar(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`)
+            .pipe(catchError((err) => this.handleError(err)));
     }
 
 

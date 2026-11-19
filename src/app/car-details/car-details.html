@@ -12,4 +12,14 @@
 @if (s.data.year) {
 <p>Year: {{ s.data.year }}</p>
 }
+<div class="actions">
+    <a matButton="filled" [routerLink]="['/cars', id(), 'edit']">Edit car</a>
+    <button matButton="outlined" (click)="deleteCar(s.data)" [disabled]="deleting()">
+        {{ deleting() ? 'Deleting...' : 'Delete car' }}
+    </button>
+    <a matButton routerLink="/cars">Back to cars</a>
+</div>
+@if (deleteError(); as message) {
+<p role="alert" class="error">{{ message }}</p>
+}
 }
