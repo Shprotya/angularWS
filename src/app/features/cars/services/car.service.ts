@@ -35,6 +35,11 @@ export class CarService {
             .pipe(catchError((err) => this.handleError(err)));
     }
 
+    deleteCar(id: string): Observable<void> {
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    }
+
+
 
     private handleError(error: HttpErrorResponse): Observable<never> {
         let message: string;
