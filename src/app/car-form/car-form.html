@@ -20,6 +20,8 @@
         <mat-error>Make must be 30 characters or fewer</mat-error>
         } @else if (carForm.controls.make.hasError('blank')) {
         <mat-error>Make cannot be only spaces</mat-error>
+        } @else if (carForm.controls.make.hasError('forbiddenValue')) {
+        <mat-error>"{{ carForm.controls.make.getError('forbiddenValue').forbidden }}" is not a valid make</mat-error>
         }
 
     </mat-form-field>

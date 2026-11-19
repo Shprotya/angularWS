@@ -36,7 +36,8 @@ export class CarService {
     }
 
     deleteCar(id: string): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+        return this.http.delete<void>(`${this.apiUrl}/${id}`)
+            .pipe(catchError((err) => this.handleError(err)));
     }
 
 
