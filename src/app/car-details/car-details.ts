@@ -5,9 +5,11 @@ import { CarModel } from '../features/cars/models/car.model';
 import { LoadState, withLoadState } from '../shared/load-state';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [],
+  imports: [RouterLink, MatButtonModule],
   selector: 'app-car-details',
   styleUrl: './car-details.scss',
   templateUrl: './car-details.html',

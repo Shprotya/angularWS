@@ -12,4 +12,8 @@
 @if (s.data.year) {
 <p>Year: {{ s.data.year }}</p>
 }
+<div class="actions">
+    <a matButton="filled" [routerLink]="['/cars', id(), 'edit']">Edit car</a>
+    <a matButton routerLink="/cars">Back to cars</a>
+</div>
 }

@@ -1,5 +1,7 @@
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()" class="car-form">
-    <h2>Car Details Form</h2>
+    <h2>{{ isEdit() ? 'Edit Car' : 'Add a Car' }}</h2>
+
+    @if (loadError(); as message) { <p role="alert">{{ message }}</p> }
 
     @if (saving()) {
     <mat-progress-bar mode="buffer" />
@@ -47,8 +49,8 @@
     @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
     <div class="button-group">
         <button matButton="filled" type="submit" [disabled]="saving()">
-            {{ saving() ? 'Saving...' : 'Save car' }}
+            {{ saving() ? 'Saving...' : (isEdit() ? 'Update car' : 'Save car') }}
         </button>
-        <a matButton routerLink="/cars">Cancel</a>
+        <a matButton [routerLink]="isEdit() ? ['/cars', id()] : ['/cars']">Cancel</a>
     </div>
 </form>
